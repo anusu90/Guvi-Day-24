@@ -7,6 +7,15 @@ var randomizer = function (array) {
         array[j] = temp;
     }
 };
+var animalObject;
+(function (animalObject) {
+    animalObject["one"] = "dog";
+    animalObject["two"] = "cat";
+    animalObject["three"] = "himalayan griffon";
+    animalObject["four"] = "otter";
+    animalObject["five"] = "gecko";
+    animalObject["six"] = "turtles";
+})(animalObject || (animalObject = {}));
 var Animal = /** @class */ (function () {
     function Animal(type, name, feature) {
         this.type = type.toLocaleLowerCase();
@@ -58,13 +67,20 @@ var Requests = /** @class */ (function () {
     Requests.prototype.addNewRequest = function (inRequest) {
         this.requestArray.push(inRequest);
     };
+    Requests.prototype.checkAllRequest = function (store) {
+        var allRequest = [];
+        this.requestArray.forEach(function (req) {
+            allRequest.push(store.mapAvailability(req));
+        });
+        return allRequest;
+    };
     return Requests;
 }());
 var myRequests = new Requests();
 var myPetStore = new Petstore();
 myRequests.addNewRequest(['cat', 'camel', 'elephant']);
 var stockCreator = function () {
-    var animals = ['cat', 'dog', 'himalayan griffon', 'otter', 'gecko', 'turtles'];
+    var animals = [animalObject.one, animalObject.two, animalObject.three, animalObject.four, animalObject.five, animalObject.six];
     var colors = ['black', 'brown', 'grey', 'spotted-blue', 'dark-brown', 'white'];
     var name = ['sammy', 'dammy', 'rammy', 'jammy', 'gammy', 'bammy'];
     var vaccine = [true, false];
@@ -76,7 +92,7 @@ var stockCreator = function () {
     }
 };
 var requestCreator = function () {
-    var animals = ['cat', 'dog', 'himalayan griffon', 'otter', 'gecko', 'turtles', 'Squirrel', 'leopard'];
+    var animals = [animalObject.one, animalObject.two, animalObject.three, animalObject.four, animalObject.five, animalObject.six, 'Squirrel', 'leopard'];
     for (var i = 0; i < 10; i++) {
         var var1 = Math.floor(Math.random() * 9);
         var1 === 0 || var1 === 1 ? var1 = 2 : 0;
@@ -84,7 +100,7 @@ var requestCreator = function () {
         randomizer(animals);
         var tempRequest = animals.slice(1, var1);
         myRequests.addNewRequest(tempRequest);
-        console.log(myRequests.requestArray);
+        //console.log(myRequests.requestArray);
     }
 };
 var checkRequestForFirstFive = function () {

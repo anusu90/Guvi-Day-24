@@ -13,6 +13,17 @@ interface animalFeature{
     vaccinated: boolean
 }
 
+type dictType = {[key:string]:number}
+
+enum animalObject{
+    one = 'dog',
+    two = 'cat', 
+    three = 'himalayan griffon', 
+    four = 'otter', 
+    five = 'gecko',
+    six = 'turtles'
+}
+
 
 class Animal{
     type:string;
@@ -30,7 +41,7 @@ class Petstore{
     stock: Array<Animal> = [];
 
     getStock (){
-        let stockDict = {}
+        let stockDict:dictType = {}
 
         this.stock.forEach(element => {
             // console.log(element);
@@ -73,6 +84,15 @@ class Requests{
     addNewRequest(inRequest:Array<string>){
         this.requestArray.push(inRequest);
     }
+
+    checkAllRequest(store:Petstore){
+        let allRequest:Array<string> = [];
+        this.requestArray.forEach(req => {
+            allRequest.push(store.mapAvailability(req))
+        })
+
+        return allRequest;
+    }
 }
 
 
@@ -86,7 +106,7 @@ let myPetStore = new Petstore();
 myRequests.addNewRequest(['cat', 'camel', 'elephant'])
 
 let stockCreator = () => {
-    let animals = ['cat', 'dog', 'himalayan griffon', 'otter', 'gecko', 'turtles']
+    let animals = [animalObject.one, animalObject.two, animalObject.three, animalObject.four, animalObject.five, animalObject.six]
     let colors = ['black', 'brown', 'grey', 'spotted-blue', 'dark-brown', 'white']
     let name = ['sammy', 'dammy', 'rammy', 'jammy', 'gammy', 'bammy']
     let vaccine = [true, false]
@@ -103,7 +123,7 @@ let stockCreator = () => {
 
 let requestCreator = () => {
 
-    let animals = ['cat', 'dog', 'himalayan griffon', 'otter', 'gecko', 'turtles', 'Squirrel', 'leopard']
+    let animals = [animalObject.one, animalObject.two, animalObject.three, animalObject.four, animalObject.five, animalObject.six, 'Squirrel', 'leopard']
     for (let i = 0; i <10; i++){
         let var1 = Math.floor(Math.random() * 9);
         var1 === 0||var1===1?var1=2:0;
@@ -111,7 +131,7 @@ let requestCreator = () => {
         randomizer(animals);
         let tempRequest = animals.slice(1,var1);
         myRequests.addNewRequest(tempRequest);
-        console.log(myRequests.requestArray);
+        //console.log(myRequests.requestArray);
     }
 
 }
@@ -122,6 +142,8 @@ let checkRequestForFirstFive: () => void = function(){
         console.log(myPetStore.mapAvailability(myRequests.requestArray[i]));
     }
 }
+
+
 
 stockCreator();
 requestCreator();
