@@ -28,19 +28,20 @@ var Animal = /** @class */ (function () {
 var Petstore = /** @class */ (function () {
     function Petstore() {
         this.stock = [];
+        this.stockDict = {};
     }
     Petstore.prototype.getStock = function () {
-        var stockDict = {};
+        var _this = this;
         this.stock.forEach(function (element) {
             // console.log(element);
-            if (stockDict[element.type] === undefined) {
-                stockDict[element.type] = 1;
+            if (_this.stockDict[element.type] === undefined) {
+                _this.stockDict[element.type] = 1;
             }
             else {
-                stockDict[element.type] = stockDict[element.type] + 1;
+                _this.stockDict[element.type] = _this.stockDict[element.type] + 1;
             }
         });
-        return stockDict;
+        return this.stockDict;
     };
     Petstore.prototype.addAnimal = function (type, name, feature, history) {
         var newAnimal = new Animal(type, name, feature, history);
@@ -112,3 +113,6 @@ var checkRequestForFirstFive = function () {
 };
 stockCreator();
 requestCreator();
+myPetStore.getStock();
+//myPetStore.addAnimal('leopard','tara', {color: 'white', vaccinated: true}, {broughtOn: new Date(), exOwner: 'juggu'})
+//myPetStore.addAnimal('camel','sara', {color: 'brown-white', vaccinated: fale}, {broughtOn: new Date(), exOwner: 'leela'})

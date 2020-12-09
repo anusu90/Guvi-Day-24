@@ -48,20 +48,20 @@ class Animal{
 
 class Petstore{
     stock: Array<Animal> = [];
+    stockDict:dictType = {}
 
     getStock (){
-        let stockDict:dictType = {}
 
         this.stock.forEach(element => {
             // console.log(element);
-            if(stockDict[element.type] === undefined){
-                stockDict[element.type] = 1;
+            if(this.stockDict[element.type] === undefined){
+                this.stockDict[element.type] = 1;
             } else {
-                stockDict[element.type] = stockDict[element.type]+1;
+                this.stockDict[element.type] = this.stockDict[element.type]+1;
             }
         });
 
-        return stockDict;
+        return this.stockDict;
     }
 
     addAnimal (type:string,name:string,feature:animalFeature,history:historyFeature){
@@ -157,6 +157,7 @@ let checkRequestForFirstFive: () => void = function(){
 
 stockCreator();
 requestCreator();
+myPetStore.getStock();
 
-//myPetStore.addAnimal('leopard','tara', {color: 'white', vaccinated: true}, {broughtOn: new Date(), exOwner: 'juggu'})
-//myPetStore.addAnimal('camel','sara', {color: 'brown-white', vaccinated: fale}, {broughtOn: new Date(), exOwner: 'leela'})
+//myPetStore.addAnimal('elephant','tara', {color: 'white', vaccinated: true}, {broughtOn: new Date(), exOwner: 'juggu'})
+//myPetStore.addAnimal('camel','sara', {color: 'brown-white', vaccinated: false}, {broughtOn: new Date(), exOwner: 'leela'})
