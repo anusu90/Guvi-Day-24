@@ -17,10 +17,11 @@ var animalObject;
     animalObject["six"] = "turtles";
 })(animalObject || (animalObject = {}));
 var Animal = /** @class */ (function () {
-    function Animal(type, name, feature) {
+    function Animal(type, name, feature, history) {
         this.type = type.toLocaleLowerCase();
         this.name = name.toLocaleLowerCase();
         this.feature = feature;
+        this.history = history;
     }
     return Animal;
 }());
@@ -41,8 +42,8 @@ var Petstore = /** @class */ (function () {
         });
         return stockDict;
     };
-    Petstore.prototype.addAnimal = function (type, name, feature) {
-        var newAnimal = new Animal(type, name, feature);
+    Petstore.prototype.addAnimal = function (type, name, feature, history) {
+        var newAnimal = new Animal(type, name, feature, history);
         this.stock.push(newAnimal);
     };
     Petstore.prototype.mapAvailability = function (req) {
@@ -84,10 +85,11 @@ var stockCreator = function () {
     var colors = ['black', 'brown', 'grey', 'spotted-blue', 'dark-brown', 'white'];
     var name = ['sammy', 'dammy', 'rammy', 'jammy', 'gammy', 'bammy'];
     var vaccine = [true, false];
+    var exOwner = ['tom', 'jhon', 'harry', 'gandalf', 'aragon', 'legolas'];
     for (var i = 0; i < 50; i++) {
         var index = Math.floor(Math.random() * 6);
         var bool = index % 2;
-        var tempAnimal = new Animal(animals[index], name[index], { color: colors[index], vaccinated: vaccine[bool] });
+        var tempAnimal = new Animal(animals[index], name[index], { color: colors[index], vaccinated: vaccine[bool] }, { createdOn: new Date(), exOwner: exOwner[index] });
         myPetStore.stock.push(tempAnimal);
     }
 };

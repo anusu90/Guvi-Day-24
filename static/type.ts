@@ -11,6 +11,12 @@ let randomizer:(array:Array<string>) => void = function(array){
 interface animalFeature{
     color: string,
     vaccinated: boolean
+
+}
+
+interface historyFeature{
+    broughtOn: Date,
+    exOwner: string
 }
 
 
@@ -30,11 +36,13 @@ class Animal{
     type:string;
     name: string;
     feature: animalFeature;
+    history:historyFeature;
 
-    constructor(type:string,name:string,feature:animalFeature){
+    constructor(type:string,name:string,feature:animalFeature,history:historyFeature){
         this.type = type.toLocaleLowerCase();
         this.name = name.toLocaleLowerCase();
         this.feature = feature;
+        this.history = history;
     }
 }
 
@@ -56,8 +64,8 @@ class Petstore{
         return stockDict;
     }
 
-    addAnimal (type:string,name:string,feature:animalFeature){
-        let newAnimal = new Animal(type,name,feature);
+    addAnimal (type:string,name:string,feature:animalFeature,history:historyFeature){
+        let newAnimal = new Animal(type,name,feature,history);
         this.stock.push(newAnimal)
     }
 
@@ -111,12 +119,13 @@ let stockCreator = () => {
     let colors = ['black', 'brown', 'grey', 'spotted-blue', 'dark-brown', 'white']
     let name = ['sammy', 'dammy', 'rammy', 'jammy', 'gammy', 'bammy']
     let vaccine = [true, false]
+    let exOwner = ['tom', 'jhon', 'harry', 'gandalf', 'aragon', 'legolas']
     
     for (let i =0; i<50; i ++ ){
         
         let index = Math.floor(Math.random() * 6);
         let bool = index%2;
-        let tempAnimal = new Animal(animals[index],name[index],{color: colors[index], vaccinated:vaccine[bool]});
+        let tempAnimal = new Animal(animals[index],name[index],{color: colors[index], vaccinated:vaccine[bool]},{broughtOn: new Date(), exOwner:exOwner[index]});
         myPetStore.stock.push(tempAnimal)
     }
 }
