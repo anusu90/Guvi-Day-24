@@ -13,6 +13,7 @@ interface animalFeature{
     vaccinated: boolean
 }
 
+
 type dictType = {[key:string]:number}
 
 enum animalObject{
