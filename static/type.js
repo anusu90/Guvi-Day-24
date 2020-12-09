@@ -89,7 +89,7 @@ var stockCreator = function () {
     for (var i = 0; i < 50; i++) {
         var index = Math.floor(Math.random() * 6);
         var bool = index % 2;
-        var tempAnimal = new Animal(animals[index], name[index], { color: colors[index], vaccinated: vaccine[bool] }, { createdOn: new Date(), exOwner: exOwner[index] });
+        var tempAnimal = new Animal(animals[index], name[index], { color: colors[index], vaccinated: vaccine[bool] }, { broughtOn: new Date(), exOwner: exOwner[index] });
         myPetStore.stock.push(tempAnimal);
     }
 };

@@ -157,3 +157,6 @@ let checkRequestForFirstFive: () => void = function(){
 
 stockCreator();
 requestCreator();
+
+//myPetStore.addAnimal('leopard','tara', {color: 'white', vaccinated: true}, {broughtOn: new Date(), exOwner: 'juggu'})
+//myPetStore.addAnimal('camel','sara', {color: 'brown-white', vaccinated: fale}, {broughtOn: new Date(), exOwner: 'leela'})
